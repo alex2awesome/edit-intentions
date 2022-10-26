@@ -38,10 +38,7 @@ def render_task():
     doc_id = request.args.get('doc_id')
     v_x = request.args.get('v_x')
     v_y = request.args.get('v_y')
-    html_version = request.args.get('html_version')
-    template = 'templates/visualize-doc-level-edits.html'
-    if html_version == 'new':
-        template = 'templates/visualize-doc-level-edits-jsplumb.html'
+    template = 'templates/visualize-doc-level-edits-jsplumb.html'
 
     if doc_id is not None and v_x is not None and v_y is not None:
         k = str((source, int(doc_id), int(v_x), int(v_y)))
