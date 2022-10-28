@@ -11,184 +11,22 @@
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
 </head>
-{#<link type="text/css" href="https://getbootstrap.com/1.0.0/assets/css/bootstrap-1.0.0.min.css">#}
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-{#<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">#}
-{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>#}
-
-{#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">#}
-{#<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>#}
 <script src="https://d3js.org/d3.v5.min.js"></script>
-{#<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>#}
-{#<script src="https://creativecouple.github.io/jquery-timing/jquery-timing.min.js"></script>#}
-{#<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>#}
-<!-- ContextMenu -->
-{#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">#}
-{#<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>#}
-{#<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>#}
 
 <!-- alertify -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/alertify.min.css">
-{#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/themes/bootstrap.min.css">#}
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/themes/default.css"> -->
 <script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
 
 <script src="https://cdn.jsdelivr.net/gh/qiao/difflib.js/dist/difflib-browser.js" crossorigin="anonymous"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
-
-<style>
-    .hidden {
-    transition: opacity 1s ease-out;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-}
-
-.example{
-    background-color: #efefef;
-    margin-left: 20px;
-    margin-right: 50px;
-    padding: 10px;
-    padding-bottom: 1px;
-}
-
-.highlighted {
-	background-color: yellow;
-}
-
-.text-mouseover{
-	border-style: solid;
-}
-
-#moving_div {
-	position: fixed;
-	width: 1px;
-	height: 1px;
-	z-index: -1;
-}
-.moving_line {
-	z-index: -1;
-}
-
-/* Handle the question text-boxes */
-.textblock {
-  border-radius: 4px;
-  background: rgba(237, 245, 241, 0.87);
-  {#display: inline-block;#}
-  border: 2px solid Black;
-  padding: 5px 10px 5px 10px;
-  margin: 10px 10px 10px 10px;
-  z-index: 1;
-}
-
-.labelblock {
-  border-radius: 1px;
-  background: rgba(187, 198, 188, 0.8);
-  {#display: inline-block;#}
-  border: 2px solid Black;
-  padding: 5px 10px 5px 10px;
-  margin: 10px 10px 10px 10px;
-  z-index: 1;
-}
-
-.textblock_pool {
-	height: 200px;
-}
-
-.textblock_span {
-	padding-right: 10px;
-}
-
-.subset-subj {
-	background: rgba(175, 255, 141, 0.6);
-	background-color: rgba(175, 255, 141, 0.6);
-}
-
-/* handle line styles*/
-.connection {
-	border: 20px;
-    border-width: 2.5px;
-	z-index: 0;
-	/*display: table;*/
-	border-radius: 100%;
-	/*pointer-events:none;*/
-	color: rgb(200, 200, 200);
-	color: rgba(0, 0, 0, 0.7);
-}
-
-.shaded {
-	border-color: #55f;
-    /*border-radius: 20px;*/
-    /*border-width: 5px;*/
-}
-
-.dropdown-menu {
-    position: absolute;
-    z-index: 100;
-}
+<script src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/js/util.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/css/mycss.css"></script>
 
 
-.deleted{
-    background-color:rgba(241,114,114,0.68)
-}
-
-.added{
-    background-color:rgba(175, 255, 141, 0.6);
-}
-
-.annotation{
-    height: 50%;
-}
-
-#submitButton{
-    z-index: 5;
-}
-
-#feedback{
-    width: 100%;
-}
-
-hr.hr-medium{
-    border: 3px solid black;
-}
-
-body{
-    margin: 10px !important;
-}
-
-/* arrows */
-.arrow {
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-  position: relative;
-}
-
-.right {
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-
-.left {
-  transform: rotate(135deg);
-  -webkit-transform: rotate(135deg);
-}
-
-.up {
-  transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
-}
-
-.down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-}
-
-</style>
 <!-- jquery connections -->
 <body>
 
