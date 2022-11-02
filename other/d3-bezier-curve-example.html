@@ -1,0 +1,130 @@
+<html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<body>
+<style>
+    svg {
+        background-color: white;
+        display: inline-block;
+    }
+    .sandbox-output {
+        text-align: center;
+    }
+    .link {
+        fill: none; stroke: black;
+    }
+    .circle {
+        r: 5px;
+        fill: black;
+        stroke: black;
+    }
+    .rectangle {
+        fill: transparent;
+        stroke: black;
+        width: 50px;
+        height: 50px;
+    }
+    .wrapper{
+        position: absolute;
+    }
+
+</style>
+
+<svg id="quickDemoH" width="800" height="800"></svg>
+
+<script>
+    //Same data used for both diagrams
+    var DO_RECT = false
+    var nodeData = [
+        {id: "D3",     lines:[0, 1],  x: 25, y: 100},
+        {id: "Scales", lines:[1],  x: 175, y: 25},
+        {id: "Shapes", lines:[0],  x: 175, y: 175}
+    ];
+
+    var linkData = [
+        {id:0, source: 'D3', target: 'Shapes'},   // D3 -> Shapes
+        {id:1, source: 'D3', target: 'Scales'}    // D3 -> Scales
+    ];
+
+    if (DO_RECT)
+        var get_attributes = d=>[d.attr('x'), d.attr('y')]
+    else
+        var get_attributes = d=>[d.attr('cx'), d.attr('cy')]
+
+    //Begin making the horizontal link diagram
+    var link = d3.linkHorizontal()
+                .source(function(d) {
+                    var node = d3.select('#node-' + d.source)
+                    return get_attributes(node)
+                })
+                .target(function(d) {
+                    var node = d3.select('#node-' + d.target)
+                    return get_attributes(node)
+                });
+
+    // append endpoints
+    if (DO_RECT) {
+        d3.select("#quickDemoH")
+            .selectAll("rect")
+            .data(nodeData).enter()
+            .append("div").classed('wrapper', true)
+            .append('rect')
+            .attr("x", d => d.x)
+            .attr("y", d => d.y)
+            .classed('rectangle', true)
+            .attr('id', d => 'node' + '-' + d.id)
+            .attr('lines', d => d.lines.join('-'))
+            .call(d3.drag().on('drag', dragged))
+
+    } else {
+        d3.select("#quickDemoH")
+            .selectAll("circle")
+            .data(nodeData).enter()
+            .append('circle')
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y)
+            .classed('circle', true)
+            .attr('id', d => 'node' + '-' + d.id)
+            .attr('lines', d => d.lines.join('-'))
+            .call(d3.drag().on('drag', dragged))
+    }
+
+    // append lines
+	d3.select("#quickDemoH") //Adding the link paths
+        .selectAll("path")
+        .data(linkData)
+        .enter().append("path")
+        //  .join("path") // equivalent to .enter().append("...")
+        .attr("d", link)
+        .classed("link", true)
+        .attr('id', d=>'line-'+d.id)
+
+    d3.select("#quickDemoH") //Adding the text labels
+          .selectAll("text")
+          .data(nodeData)
+          .join("text")
+          .attr("font-size", "12px")
+          .attr("text-anchor", "middle")
+          .attr("x", d => d.x)
+          .attr("y", d => d.y + 20)
+          .attr('id', d => 'text' + '-' + d.id)
+          .text(d => d.id);
+
+    function dragged() {
+        var current = d3.select(this);
+        current
+            .attr('cx', d3.event.x)
+            .attr('cy', d3.event.y);
+
+        current.attr('lines').split('-')
+            .forEach(function(d, i){
+                d3.select('#line' + '-' + d).attr('d', link)
+            })
+
+    }
+
+</script>
+</body>
+</html>

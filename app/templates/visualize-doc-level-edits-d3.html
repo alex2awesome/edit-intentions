@@ -11,20 +11,40 @@
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
 </head>
+
+{% if do_mturk %}
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
-
-<!-- alertify -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/alertify.min.css">
 <script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
-
 <script src="https://cdn.jsdelivr.net/gh/qiao/difflib.js/dist/difflib-browser.js" crossorigin="anonymous"></script>
-<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.bundle.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/alertify.min.css">
 <script src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/js/util.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/css/mycss.css"></script>
+
+{#<link rel='stylesheet' href="{{ url_for('static', filename='css/mycss.css') }}">#}
+{% else %}
+
+<script src="{{  url_for('static', filename='js/jquery-3.5.1.js') }}" crossorigin="anonymous"></script>
+<script src="{{  url_for('static', filename='js/bootstrap-v5.0.0.min.js') }}"></script>
+<script src="{{  url_for('static', filename='js/d3.v5.min.js') }}"></script>
+<script src="{{  url_for('static', filename='js/alertify.min.js') }}"></script>
+<script src="{{  url_for('static', filename='js/difflib-browser.js') }}" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="{{  url_for('static', filename='css/bootstrap-v5.0.0.min.css') }}">
+<link rel="stylesheet" href="{{  url_for('static', filename='css/alertify.min.css') }}" >
+<script src="{{  url_for('static', filename='js/util.js') }}"></script>
+<link rel='stylesheet' href="{{ url_for('static', filename='css/mycss.css') }}">
+
+{% endif %}
+
+
+
+
+
 
 
 <!-- jquery connections -->
@@ -210,37 +230,81 @@
         </div>
 
 
+<style>
+    svg {
+      position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+    circle {
+        {#z-index: 2;#}
+    }
+    .labelblock {
+        z-index: 3;
+    }
 
-<form name='mturk_form' method='post' id='mturk_form' action='/mturk/externalSubmit'>
+    .textblock_pool_version_x{
+        padding-right: 0;
+    }
+
+    .textblock_pool_version_y{
+        padding-left: 0;
+    }
+    .blank_column{
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .textblockwrapper{
+        padding: 0;
+    }
+    .labelblockwrapper{
+        padding: 0;
+    }
+
+    #main-svg{
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .link {
+        fill: none;
+        stroke: black;
+    }
+
+</style>
+{% if do_mturk %}
+    <form name='mturk_form' method='post' id='mturk_form' action='/mturk/externalSubmit'>
+{% endif %}
 <input type='hidden' value='' name='assignmentId' id='assignmentId'/>
-<svg>
     <div class="container-fluid">
-        <p>Article Key: {{ doc_id }}</p>
-        <br>
-        <div class="row header">
-            <div class="col-2"></div>
-            <div class="col-3"><h4>Old Version</h4></div>
-            <div class="col-1"></div>
-            <div class="col-3"><h4>New Version</h4></div>
-            <div class="col-2"></div>
-        </div>
-        <div class="row text jtk-demo-canvas canvas-wide flowchart-demo jtk-surface jtk-surface-nopan" id="canvas">
-{#            <div class="col-2 labelblock_pool_x"></div>#}
-            <div class="col-6 textblock_pool_version_x" doc_id="{{ doc_id }}" ></div>
-{#            <div class="col-1 filler" doc_id="{{ doc_id }}" ></div>#}
-            <div class="col-6 textblock_pool_version_y" doc_id="{{ doc_id }}" ></div>
-{#            <div class="col-2 labelblock_pool_y"></div>#}
-        </div>
+    <p>Article Key: {{ doc_id }}</p>
+    <br>
+    <div class="row header">
+        <div class="col-3"></div>
+        <div class="col-2"><h4>Old Version</h4></div>
+        <div class="col-2"></div>
+        <div class="col-2"><h4>New Version</h4></div>
+        <div class="col-3"></div>
     </div>
-</svg>
+    <svg id="main-svg">
+        <div class="row text" id="main-div">
+            <div class="col-5 textblock_pool_version_x" doc_id="{{ doc_id }}" ></div>
+            <div class="col-2 blank_column"></div>
+            <div class="col-5 textblock_pool_version_y" doc_id="{{ doc_id }}" ></div>
+        </div>
+    </svg>
+</div>
 
 <button type="submit" id='submitButton' value='Submit'>Submit form</button>
 </form>
 
 <script language='Javascript'>
 
-    var edit_html =`
-        <select class="edit-intention">
+    var edit_select_html =`
+        <select class="edit-intention form-select">
             <option value="" selected disabled></option>
             <option value="" disabled>Clarification</option>
             <option value="">&#160;&#160;&#160;Simplification</option>
@@ -281,7 +345,21 @@
             this.start_line_id = null
             // z-index for dropdown needs to increase every click :/ maybe not the best implementation
             this.curr_dropdown_zindex = 3
-            this.num_lines= 0
+            this.num_lines = 0
+
+
+            // endpoint side-length
+            this.l = '10px'
+            var that = this
+            this.link = d3.linkHorizontal()
+                .source(function(d) {
+                    var node = $('#sentence-x-' + d.source).find('circle')
+                    return that._get_offset_to_svg_circle(node)
+                })
+                .target(function(d) {
+                    var node = $('#sentence-y-' + d.target).find('circle')
+                    return that._get_offset_to_svg_circle(node)
+                });
         }
 
         _process_data(){
@@ -297,6 +375,8 @@
             that.node_to_arc_dict = {'x': {}, 'y': {}} // map each node to a list of arcs
             that.arc_to_node_dict = {} // map each arc to the nodes on either side of it
 
+            var add_del_redundancy = {'x': [], 'y': [] } // not all arcs are marked.
+
             // create textblocks
             $(that.data.nodes)
                 .sort(function(a, b) {return a.sent_idx - b.sent_idx})
@@ -304,6 +384,7 @@
                     var vers = that.version_mapper[d.version]
                     that.data_by_version[vers].push(d)
                     that.node_edit_action_dict[vers][d.sent_idx] = {'action': 'unchanged'}
+                    add_del_redundancy[vers].push(d.sent_idx)
                 })
 
             // find which nodes have been edited. Those that haven't are either added/deleted based on version.
@@ -311,24 +392,29 @@
                 .forEach( function(d){
                     // edited nodes
                     if((d.sent_idx_x != null) & (d.sent_idx_y != null)) {
-                        var line_selector = 'line-' + that._get_new_connection_idx()
+                        var line_selector = 'line-' + that.num_lines++
                         that.node_edit_action_dict['x'][d.sent_idx_x] = {'action': 'edited', 'other': d.sent_idx_y}
                         that.node_edit_action_dict['y'][d.sent_idx_y] = {'action': 'edited', 'other': d.sent_idx_x}
                         // update node data
                         // that.data.nodes.filter(e=> (e.sent_idx == d.sent_idx_x) & (e.version == that.x_vers))[0]
                         that.node_to_arc_dict['x'][d.sent_idx_x] = (that.node_to_arc_dict['x'][d.sent_idx_x] || []).concat(line_selector)
                         that.node_to_arc_dict['y'][d.sent_idx_y] = (that.node_to_arc_dict['y'][d.sent_idx_y] || []).concat(line_selector)
-                        that.arc_to_node_dict[line_selector] = {'x':  d.sent_idx_x, 'y': d.sent_idx_y}
+                        that.arc_to_node_dict[line_selector] = {'x': d.sent_idx_x, 'y': d.sent_idx_y}
 
-                    // deleted nodes
-                    } else if ((d.sent_idx_x != null) & (d.sent_idx_y == null)){
-                        that.node_edit_action_dict['x'][d.sent_idx_x] = {'action': 'deleted'}
-
-                    // added nodes
-                    } else if ((d.sent_idx_x == null) & (d.sent_idx_y != null)){
-                        that.node_edit_action_dict['y'][d.sent_idx_y] = {'action': 'added'}
+                        add_del_redundancy['x'].remove_by_value(d.sent_idx_x)
+                        add_del_redundancy['y'].remove_by_value(d.sent_idx_y)
                     }
                 })
+
+            // deleted nodes
+            add_del_redundancy['x'].forEach(function(d){
+                that.node_edit_action_dict['x'][d] = {'action': 'deleted'}
+            })
+
+            // added nodes
+            add_del_redundancy['y'].forEach(function(d){
+                that.node_edit_action_dict['y'][d] = {'action': 'added'}
+            })
         }
 
         _make_rows(version){
@@ -339,67 +425,109 @@
                     .append('div').classed('row', true)
         }
 
-        _helper_get_textblock_html(d, that){
-            var this_vers = that.version_mapper[d.version]
-            var action = that.node_edit_action_dict[this_vers][d.sent_idx].action
-            if (action != 'edited') {
-                return d.sentence
-            } else {
-                var other_vers = this_vers == 'x' ? 'y' : 'x'
-                var arcs = this.node_to_arc_dict[this_vers][d.sent_idx]
-                var all_incoming_text = arcs
-                    .map(d => that.arc_to_node_dict[d][other_vers]).sort() // connecting textblocks on other side
-                    .map(d => that.data_by_version[other_vers][d].sentence)
-
-                if (other_vers == 'y') {
-                    return html_compare_sentences(d.sentence, all_incoming_text.join(' '))[0]
+        _draw_textblocks(rows_obj, version){
+            function _helper_get_textblock_html(d, that){
+                var this_vers = that.version_mapper[d.version]
+                var action = that.node_edit_action_dict[this_vers][d.sent_idx].action
+                if (action != 'edited') {
+                    return d.sentence
                 } else {
-                    return html_compare_sentences(all_incoming_text.join(' '), d.sentence)[1]
+                    var other_vers = this_vers == 'x' ? 'y' : 'x'
+                    var arcs = that.node_to_arc_dict[this_vers][d.sent_idx]
+                    var all_incoming_text = arcs
+                        .map(d => that.arc_to_node_dict[d][other_vers]).sort() // connecting textblocks on other side
+                        .map(d => that.data_by_version[other_vers][d].sentence)
+
+                    if (other_vers == 'y') {
+                        return html_compare_sentences(d.sentence, all_incoming_text.join(' '))[0]
+                    } else {
+                        return html_compare_sentences(all_incoming_text.join(' '), d.sentence)[1]
+                    }
                 }
             }
-        }
 
-
-        _draw_textblocks(rows_obj, version){
             var that = this
 
-            return rows_obj.append('div').classed('textblock', true).classed('col-5', true)
+            return rows_obj
+                    .append('div').classed('textblockwrapper', true).classed('col-6', true) // so that the margin goes on the inside
+                    .append('div').classed('textblock', true)
                     .attr('doc_id', that.doc_key)
                     .attr('id', d => 'sentence-' + version + '-' + d.sent_idx)
-                    .attr('version', d => d.version)
+                    .attr('version', d => that.version_mapper[d.version])
                     .attr('class', function(d){
                         return $(this).attr('class') + " " + that.node_edit_action_dict[version][d.sent_idx].action
                     })
                     .attr('orig-text', d => d.sentence)
                     .append('span').classed('textblock_span', true)
                     //.text(d => d.sentence)
-                    .html(d=>that._helper_get_textblock_html(d, that))
-        }
-
-        _helper_get_labelblock_html(d, that){
-            var this_vers = that.version_mapper[d.version]
-            var action = that.node_edit_action_dict[this_vers][d.sent_idx].action
-
-            switch(action){
-                case 'added': var header = 'Addition Intention'; break;
-                case 'edited': var header = 'Edit Intention'; break;
-                case 'deleted': var header = 'Deletion Intention'; break;
-            }
-
-            return '<p>' + header + '</p>' + edit_html
+                    .html(d=>_helper_get_textblock_html(d, that))
         }
 
         _draw_labelblocks(rows_obj, version){
             var that = this
-            return rows_obj.append('div').classed('labelblock', true).classed('col-5', true)
-                    .classed('hidden', d=>(d.version=='y' & d.action=='edited'))
+            function _helper_get_labelblock_html(d, that){
+                var this_vers = that.version_mapper[d.version]
+                var action = that.node_edit_action_dict[this_vers][d.sent_idx].action
+                switch(action){
+                    case 'added': var header = 'Addition Intention'; break;
+                    case 'edited': var header = 'Edit Intention'; break;
+                    case 'deleted': var header = 'Deletion Intention'; break;
+                }
+                return '<p>' + header + '</p>'
+            }
+            function _is_hidden(d){
+                var vers = that.version_mapper[d.version]
+                var datum = that.node_edit_action_dict[vers][d.sent_idx]
+                if ((datum.action == undefined) | (datum.action == 'unchanged'))
+                    return true
+                else
+                    return ((vers == 'y') & (datum.action == 'edited'))
+            }
+
+            var labelblock_obj = rows_obj.append('div').classed('labelblockwrapper', true).classed('col-6', true)
+                    .append('div').classed('labelblock', true).classed('row', true)
+                    .classed('hidden', _is_hidden)
                     .attr('doc_id', that.doc_key)
+                    .attr('num_slots', 1).attr('version', version)
                     .attr('id', d => 'label-' + version + '-' + d.sent_idx)
-                    .html(d=>that._helper_get_labelblock_html(d, that))
+                    .html(d => _helper_get_labelblock_html(d, that))
+
+                labelblock_obj.append('div').classed('dropdown_column', true).classed('col-8', true)
+                    .append('div').classed('input_fields', true).classed('slot_num_1', true).attr('slot_num', 1)
+                    .html(edit_select_html)
+
+            var button_obj = labelblock_obj.append('div')
+                                            .classed('button_column', true).classed('col-4', true)
+                button_obj.append('div').classed('btn', true).classed('btn-secondary', true)
+                                        .style('width', '50%').html('+')
+                                        .classed('labelblock_' + version + '_button_plus', true)
+                button_obj.append('div').classed('btn', true).classed('btn-secondary', true)
+                                        .style('width', '50%').html('-')
+                                        .classed('labelblock_' + version + '_button_minus', true)
+
+            $('.labelblock_' + version + '_button_plus').on('click', function(){
+                var existing_slots = $(this).parents('.labelblock').attr('num_slots')
+                var slot_num = parseInt(existing_slots) + 1
+                $(this).parents('.labelblock').attr('num_slots', slot_num)
+                var col = $(this).parents('.labelblock').find('.dropdown_column')
+                $('<div>' + edit_select_html + '</div>').appendTo(col)
+                    .addClass('slot_num_' + slot_num).addClass('input_fields')
+                    .attr('slot_num', slot_num)
+            })
+
+            $('.labelblock_' + version + '_button_minus').on('click', function(){
+                var existing_slots = $(this).parents('.labelblock').attr('num_slots')
+                if (existing_slots > 1) {
+                    var slot_num = parseInt(existing_slots) - 1
+                    $(this).parents('.labelblock').find('.slot_num_' + existing_slots).remove()
+                    $(this).parents('.labelblock').attr('num_slots', slot_num)
+                }
+            })
+
+
         }
 
         draw_canvas(){
-            var that = this
             this._process_data()
 
             // create textblock rows ( x => label pool, textblock pool)
@@ -411,65 +539,95 @@
             this._draw_textblocks(rows_y, 'y')
             this._draw_labelblocks(rows_y, 'y')
 
-            // create links between edited segments and update the PageManager's classes
-          // $(this.data.arcs).each( function(i, d){
-          //     if ((d.sent_idx_x != null ) && (d.sent_idx_y != null)){
-          //         var sel = that.update_node_data_with_new_connection(d.sent_idx_x, d.sent_idx_y)
-          //         d.line_sel = sel
-          //     }
-          // })
-
-          //  this._draw_all_connections()
+            // draw connections
+            this._draw_all_connections()
         }
 
-        _get_new_connection_idx(){
-            this.num_lines =  this.num_lines + 1
-            return this.num_lines
+        _add_endpoint(textblock_id, side){
+            var side_class = side == 'x' ? 'start-100' : 'start-0'
+            d3.select('#' + textblock_id)
+                .classed('position-relative', true)
+            .append('div').style('width', this.l).style('height', this.l)
+                .classed('anchor', true)
+                .classed('position-absolute', true)
+                .classed('top-50', true)
+                .classed(side_class, true)
+                .classed('translate-middle', true)
+            .append('svg').style('height', '100%').style('width', '100%')
+                .append('circle')
+                .attr('r', '50%')
+                .attr('cx', '50%').attr('cy', '50%').style('fill', 'gray')
         }
 
-        _add_endpoint(element_id, anchor_position, this_id, css_class){
-
+        _get_offset_to_svg_circle(d){
+            var svg_off_l = $('#main-svg').offset().left,
+                svg_off_t = $('#main-svg').offset().top,
+                el_off_l = $(d).offset().left,
+                el_off_t = $(d).offset().top,
+                el_r = parseFloat(this.l.replace('px', '')) / 2
+            return [el_off_l - svg_off_l + el_r, el_off_t - svg_off_t + el_r]
         }
 
-        _draw_connection(left_id, right_id, line_selector){
-            var left_id = 'sentence-x-' + left_id
-            var right_id = 'sentence-y-' + right_id
-            this._add_endpoint(left_id, "RightMiddle", left_id + "RightMiddle", 'endpoint')
-            this._add_endpoint(right_id, "LeftMiddle", right_id + "LeftMiddle" , 'endpoint')
-            var con = this.instance.connect({
-                uuids: [left_id + "RightMiddle", right_id + "LeftMiddle"],
-                isDetachable: false,
-                cssClass: line_selector + ' line',
+        _draw_all_connections(){
+            var that = this
+            $('#main-svg').height($('#main-div').height())
+            var data = Object.entries(pm.arc_to_node_dict)
+                .map(function(d){return {'line': d[0], 'source': d[1].x, 'target': d[1].y}})
+
+            // add endpoints
+            data.forEach(function(d){
+                that._add_endpoint('sentence-x-' + d.source, 'x')
+                that._add_endpoint('sentence-y-' + d.target, 'y')
             })
-            return con
+
+            // add connections
+            d3.select('#main-svg')
+                .selectAll('path')
+                .data(data).enter().append('path')
+                .attr('d', that.link)
+                .classed('link', true) // .classed('connection', true) // one is for CSS properties, the other is for
+                .attr('id', d=>d.line)
+
         }
 
         _post_drawing_page(){
+            function _update_connection_position(that){
+                $('#main-svg').height($('#main-div').height())
+                d3.selectAll('.link').attr('d', that.link)
+            }
+
+            // handle mouseovers
             const this_pagemanager = this
-            $('.textblock')
+            $('.textblock, .labelblock')
                 .on('mouseover', function(){
-                    var this_textblock = this
-                    $(this_textblock).addClass('shaded')
+                    var this_block = this
+                    var block_num = this.id.split('-')[2]
+                    $(this_block).parent().parent().find('.textblock,.labelblock').addClass('shaded')
 
                     // update all the nodes on the other side as this node.
-                    var node_arcs = this_pagemanager.node_to_arc_dict[this.id] || []
-                    var version = $(this_textblock).attr('version')
+                    var version = $(this_block).attr('version')
                     var version_swap = {'x':'y', 'y':'x'}
                     var other_version = version_swap[version]
+                    var node_arcs = this_pagemanager.node_to_arc_dict[version][block_num] || []
                     node_arcs.forEach(function(d){
                         // shade the arc itself
-                        $('.' + d).addClass('shaded')
+                        $('#' + d).addClass('shaded')
                         // get other textblock and the html that it should update to.
-                        var other_textblock_sel = this_pagemanager.arc_to_node_dict[d][other_version]
+                        var other_sel = this_pagemanager.arc_to_node_dict[d][other_version]
                         // shade the other textblock that the arc connects
-                        $('#' + other_textblock_sel).addClass('shaded')
+                        $('#sentence-' + other_version + '-' + other_sel).addClass('shaded')
+                        $('#label-' + other_version + '-' + other_sel).addClass('shaded')
                     })
                 })
                 .on('mouseout', function(d) {
-                    $('.connection').removeClass('shaded')
+                    $('.link').removeClass('shaded')
                     $('.textblock').removeClass('shaded')
+                    $('.labelblock').removeClass('shaded')
                 })
 
+            // handle movements
+            $(window).on('load resize', function() { _update_connection_position(this_pagemanager) })
+            $('.btn').on('click', function() { _update_connection_position(this_pagemanager) })
         }
     }
 
@@ -486,37 +644,49 @@
     pm.draw_canvas()
     pm._post_drawing_page()
 
+
     //
     // mturk
     // handle data
     class SubmitHandler{
         constructor() {
-            turkSetAssignmentID();
+            {% if do_mturk %}
+                turkSetAssignmentID();
+            {% endif %}
             this.GENERIC_THANKS_MESSAGE = 'Thank you so much for your help with our task!'
         }
 
         get_data_from_dom() {
             this.output = []
+            var that = this
             var ids = $('.labelblock').map(function(i, d){return $(d).attr('id')})
             var versions = $(ids).map(function(i, d){return d.split('-')[1]})
             var sent_idxs = $(ids).map(function(i, d){return d.split('-')[2]})
-            var labels = $('.labelblock').find(":selected").map(function(i, d){ return $(d).text()})
             var is_hidden = $('.labelblock').map(function(i, d){return $(d).hasClass('hidden')})
-            for (var i = 0; i < versions.length; i++){
+
+            //
+            $('.labelblock').each(function(i, label_block){
+                var labels = $(label_block).find('.input_fields').map(function(i, d){
+                    return {
+                        'label': $(d).find(":selected").text(),
+                        'intention_num': $(d).attr('slot_num')
+                    }
+                })
+
                 var datum = {}
                 datum['version'] = versions[i]
                 datum['sent_idx'] = sent_idxs[i]
                 var action = pm.node_edit_action_dict[versions[i]][sent_idxs[i]]
-                if (action.split('-')[0] == 'edited'){
+                if (action.action == 'edited'){
                     datum['action'] = 'edited'
-                    datum['other_version_sent_idx'] = action.split('-')[1]
+                    datum['other_version_sent_idx'] = action.other
                 } else {
-                    datum['action'] = action
+                    datum['action'] = action.action
                 }
                 datum['is_hidden'] = is_hidden[i]
-                datum['label'] = labels[i]
-                this.output.push(datum)
-            }
+                datum['labels'] = labels.toArray()
+                that.output.push(datum)
+            })
         }
 
         gather_and_submit_data(submit_button, submit_click_event) {
@@ -530,7 +700,7 @@
             var that = this
             // First question
             var non_hidden_data = that.output.filter(function(d, i){ return d['is_hidden'] == false })
-            var uncompleted = non_hidden_data.map(function(d){return d['label'] == ''})
+            var uncompleted = non_hidden_data.flatMap(function(d){return d.labels.map(function(d){return d.label})})
             if (d3.sum(uncompleted) > 0){
                 alert('You have at least one unfilled intention-box. Please check and resubmit!!')
             } else {

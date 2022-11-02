@@ -1,0 +1,231 @@
+<!-- YOUR HTML BEGINS -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+</head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<style>
+    .box{
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        {#height: 50px;#}
+    }
+
+    .innerbox{
+        height: 50px;
+    }
+
+    svg {
+        pointer-events: none;
+        position: absolute;
+    }
+
+    circle{
+        fill: black;
+    }
+
+    .holder{
+        background-color: #2a6496;
+        width: 25px;
+        height: 25px;
+    }
+
+    .link {
+        fill: none;
+        stroke: black;
+    }
+
+
+</style>
+
+<body>
+
+<br><br><br><br><br>
+
+
+
+<svg id="main" height="100%" width="100%">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4 box"><span>Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello</span></div>
+        <div class="col-4 box dropdown"></div>
+        <div class="col-4 box">
+            <div class="row">
+                <div class="col-4 box innerbox target position-relative">
+                    <div class="holder position-absolute top-50 start-100 translate-middle"></div>
+                    <div class="holder position-absolute top-50 start-0 translate-middle" id="target-div"></div>
+                </div>
+                <div class="col-4 box innerbox"></div>
+                <div class="col-4 box innerbox"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 box">
+            <div class="row">
+                <div class="col-4 box innerbox"></div>
+                <div class="col-4 box innerbox dropdown"></div>
+                <div class="col-4 box innerbox target"></div>
+            </div>
+        </div>
+        <div class="col-4 box"></div>
+        <div class="col-4 box"></div>
+    </div>
+    <div class="row">
+        <div class="col-4 box"><span>Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello</span></div>
+        <div class="col-4 box"></div>
+        <div class="col-4 box"></div>
+    </div>
+    <div class="row">
+        <div class="col-4 box">
+            <div class="row">
+                <div class="col-4 box innerbox target"></div>
+                <div class="col-4 box innerbox"></div>
+                <div class="col-4 box innerbox position-relative">
+                    <div class="holder position-absolute top-50 start-100 translate-middle" id="source-div"></div>
+                    <div class="holder position-absolute top-50 start-0 translate-middle"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 box"></div>
+        <div class="col-4 box">
+            <span>Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello</span>
+        </div>
+    </div>
+</div>
+</svg>
+
+
+<br><br><br><br><br>
+
+<div class="container-fluid position-relative source-div">
+    <div class="holder position-absolute top-50 start-100 translate-middle"></div>
+
+    <div class="row">
+        <div class="col-4 box"><span>Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello</span></div>
+        <div class="col-4 box dropdown"></div>
+        <div class="col-4 box"></div>
+    </div>
+</div>
+
+<script>
+    // construct dropdowns to make sure we're not blocking them at any point
+    var edit_html =`
+        <select class="edit-intention">
+            <option value="" selected disabled></option>
+            <option value="" disabled>Clarification</option>
+            <option value="">&#160;&#160;&#160;Simplification</option>
+            <option value="">&#160;&#160;&#160;Define term</option>
+            <option value="" disabled>Copy Editing</option>
+            <option value="">&#160;&#160;&#160;Style Changes</option>
+            <option value="">&#160;&#160;&#160;Syntax Correction</option>
+            <option value="" disabled>Elaboration</option>
+            <option value="">&#160;&#160;&#160;Background</option>
+            <option value="">&#160;&#160;&#160;Analysis</option>
+            <option value="" disabled>Fact Update</option>
+            <option value="">&#160;&#160;&#160;Event Update</option>
+            <option value="">&#160;&#160;&#160;Quote Update</option>
+            <option value="">&#160;&#160;&#160;Document Update</option>
+            <option value="" disabled>Verification</option>
+            <option value="">&#160;&#160;&#160;Correction</option>
+            <option value="">&#160;&#160;&#160;Additional Sourcing</option>
+        </select>
+    `
+
+    d3.selectAll('.dropdown')
+        .each(function () {
+            d3.select(this)
+                .append('div')
+                .html(edit_html)
+    })
+
+    // add circles
+    //    add circles to target divs
+    d3.selectAll('.target')
+        .each(function(){
+            d3.select(this)
+                .append('svg')
+                .append('circle')
+                .attr('id', this.id.replace('-div', ''))
+                .attr('r', 10)
+                .attr('cx', 10)
+                .attr('cy', 50)
+                .classed('example', true)//.css('fill', 'black')
+            }
+        )
+
+    // add circles to position-absolute divs
+    d3.selectAll('.holder')
+        .each(function(){
+            var h = $(this).height(),
+                w = $(this).width()
+            var r = d3.min([h, w]) / 2
+            d3.select(this)
+                .append('svg')
+                .style('height', h)
+                .style('width', w)
+                .append('circle')
+                .attr('id', this.id.replace('-div', ''))
+                .attr('r', r).attr('cx', '50%').attr('cy', '50%').style('fill', 'pink')
+        })
+
+
+    // add links
+    var linkData = [
+        {id:0, source: 'source', target: 'target'},
+    ];
+    var _get_offset_to_svg_circle = function(d){
+        var svg_off_l = $('#main').offset().left,
+            svg_off_t = $('#main').offset().top,
+            el_off_l = $(d).offset().left,
+            el_off_t = $(d).offset().top,
+            el_r = parseFloat($(d).attr('r'))
+        return [el_off_l - svg_off_l + el_r, el_off_t - svg_off_t + el_r]
+    }
+    var link = d3.linkHorizontal()
+                .source(function(d) {
+                    var node = $('#' + d.source)
+                    return _get_offset_to_svg_circle(node)
+                })
+                .target(function(d) {
+                    var node = $('#' + d.target)
+                    return _get_offset_to_svg_circle(node)
+                });
+
+    d3.select("#main") //Adding the link paths
+        .selectAll("path")
+        .data(linkData)
+        .enter().append("path")
+        .attr("d", link)
+        .classed("link", true)
+        .attr('id', d=>'line-'+d.id)
+
+
+    r = $('.example').attr('r')
+//     $('.example').parent().attr('width', r * 2).attr('height', r * 2)
+
+    $('.box')
+        .on('mouseover', function(){ $(this).css('background-color', 'purple') })
+        .on('mouseout', function(){ $(this).css('background-color', 'transparent') })
+
+    $('.innerbox')
+        .on('mouseover', function(){ $(this).css('background-color', 'red') })
+        .on('mouseout', function(){ $(this).css('background-color', 'transparent') })
+
+    $('.example')
+        .on('mouseover', function(){ $(this).css('fill', 'cyan').css('stroke', 'cyan') })
+        .on('mouseout', function(){ $(this).css('fill', 'black').css('stroke', 'black') })
+
+
+</script>
+
+</body>
+</html>

@@ -1,10 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
 <body>
-$END$
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-delaunay@6"></script>
+
+<svg id="quickDemo" width="800" height="800"></svg>
+
+
+<script>
+    var svg = d3.select("body").append('svg')
+        .attr('width', '400')
+        .attr('height', '400')
+        .style('border', 'solid 1px');
+
+    var dragHandler = d3.drag()
+        .on('drag', dragged)
+
+    var circle = svg.append("circle")
+        .attr("cx", 50)
+        .attr("cy", 50)
+        .attr('r', 20)
+        .call(dragHandler)
+
+    var nodeData = [
+        {id: "D3",       x: 100, y: 25},
+        {id: "Scales",   x: 25, y: 175},
+        {id: "Shapes",   x: 175, y: 175}
+    ];
+
+    var circles = svg.selectAll('node')
+                        .data(nodeData)
+                        .enter()
+                        .append('circle')
+                        .attr("cx", d => d.y)
+                        .attr("cy", d => d.x)
+                        .attr('r', 5)
+                        .call(dragHandler)
+
+    function dragged() {
+        var current = d3.select(this);
+        current
+            .attr('cx', d3.event.x)
+            .attr('cy', d3.event.y);
+    }
+
+</script>
+
 </body>
 </html>

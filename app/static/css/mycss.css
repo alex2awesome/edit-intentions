@@ -35,7 +35,6 @@
 .textblock {
   border-radius: 4px;
   background: rgba(237, 245, 241, 0.87);
-  {#display: inline-block;#}
   border: 2px solid Black;
   padding: 5px 10px 5px 10px;
   margin: 10px 10px 10px 10px;
@@ -45,7 +44,6 @@
 .labelblock {
   border-radius: 1px;
   background: rgba(187, 198, 188, 0.8);
-  {#display: inline-block;#}
   border: 2px solid Black;
   padding: 5px 10px 5px 10px;
   margin: 10px 10px 10px 10px;
@@ -79,8 +77,10 @@
 
 .shaded {
 	border-color: #55f;
+    stroke: #55f !important;
+    stroke-width: 2;
     /*border-radius: 20px;*/
-    /*border-width: 5px;*/
+    border-width: 2px;
 }
 
 .dropdown-menu {
