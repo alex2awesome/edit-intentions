@@ -254,12 +254,13 @@ if __name__ == '__main__':
     DEFAULT_OUT = "../app/static/assets/instructions.html"
     DEFAULT_OUTPUT_DIR = "../app/static/assets/img/"
     DEFAULT_REL_PATH_TO_IMG = "/static/assets/img"
+    MTURK_PATH_TO_IMG = "https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/"
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', help='Input docx file', type=str, default=DEFAULT_ORIG)
     parser.add_argument('-d', help='Img dir', type=str, default=DEFAULT_IMG_DIR)
     parser.add_argument('-o', help='Output File', type=str, default=DEFAULT_OUT)
-    parser.add_argument('--img_path', type=str, default=DEFAULT_REL_PATH_TO_IMG)
+    parser.add_argument('--img_path', type=str, default=MTURK_PATH_TO_IMG)
 
     ##
     args = parser.parse_args()

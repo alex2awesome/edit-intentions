@@ -36,14 +36,13 @@
 
 <!-- jquery connections -->
 <body>
-
     <div class="row instructions">
         <div class="col-12">
             <div id="accordion">
               <div class="card">
                 <div class="card-header" id="hello_header">
                   <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#hello">
+                    <button class="btn btn-link" type="button" data-bs-toggle="collapse" href="#hello">
                       Hello, about us, and thank you for your help!
                     </button>
                   </h5>
@@ -66,36 +65,22 @@
               <div class="card">
                 <div class="card-header" id="headingOne">
                   <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" type="button" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" type="button" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                       Instructions
                     </button>
                   </h5>
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                        <i><u><b>NOTE: THIS SECTION IS OLD. The updated instructions should go here.</b></u></i>
-                        <br><br>
-                        You will be adding, deleting and moving sentences around in a news article to anticipate what a future version looks like.
-                        <br><br>
-                        * <b><u>Add a sentence</u></b> either <i>below</i> or <i>above</i> the current sentence by pressing the <span style="background-color: rgba(0,160,0,0.63)">Add &uarr;</span> or <span style="background-color: rgba(0,160,0,0.63)">Add &darr;</span> buttons. Adding a sentence means that you feel there is substantially new information, a novel viewpoint or quote, or necessary background
-                        information that needs to be present.
-                        <br><br>
-                        * <b><u>Move a sentence</u></b> by dragging it around on the canvas. Moving a sentence,  (or what we're calling <b><i>refactoring</i></b>) means that the importance of a sentence should be either increased or decreased within the article. <b><u>Please note:</u></b> refactors are rare!
-                        <br><br>
-                        * <b><u>Delete a sentence</u></b> by hitting the <span style="background-color: rgba(0,160,0,0.63)">Delete</span> button. Deleting an <b>Added</b> sentence just reverses that action - we will not record this. Deleting a sentence that is present means you feel it needs to be (a) substantially rewritten (ergo: a new sentence should also be <b>Added</b>), or (b) the sentence no longer applies given new information that was added.
-                        <br><br>
-                        * <b><u>Edit a sentence</u></b> by hitting the <span style="background-color: rgba(0,160,0,0.63)">Edit</span> button. Editing a sentence means that the wording might change a little bit due to other changes happening around the sentence or events within the sentence being updated.
-                        <br><br>
-                        * <b><u>Leaving a sentence unchanged</u></b> means that you don't really expect the sentence to change at all in the next version of the article.
-                        <br><br>
-                        When you're ready to submit, please hit the <span style="background-color: rgba(0,160,0,0.63)">Submit</span> button and please check to see what the actual edits were so you can improve for next task!
+                    <div class="card-body" id="inner-instructions">
+                        <!-- actual instructions will go here. -->
+                        <div class="top-level-category"><h2>Clarification</h2><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-0" type="button"><h3>Simplification</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-0"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>Reduce the complexity or breadth of discussion; may remove information </p></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-1" type="checkbox"/><label class="form-check-label" for="form-check-input-1">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/1.png" width="100%"/></div><div class="example-block"><span>Before the work began <span style="background-color:rgba(255,0,0,0.3)">in</span> <span style="background-color:rgba(255,0,0,0.3)">early</span> <span style="background-color:rgba(255,0,0,0.3)">July</span> , New York Gov.→Before the work began    , New York Gov.</span></div><div class="explanation"><h5>Explanation:</h5><p>“In early July” is removed because July has been mentioned in the previous sentence. Hence, it is being simplified for clarification. This is not <i>Emphasizing a fact</i> because no text is added. Neither is it a <i>Tonal Edit</i> because the edit only involves deletion of texts instead of different word choices.</p></div></div></div></div></div><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-1" type="button"><h3>Define term</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-1"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>The author provides a definition of a term that was not defined in the previous version.</p></div></div></div></div><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-2" type="button"><h3>Emphasizing a fact</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-2"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>The journalist expands the sentence to highlight a fact but does not introduce additional background or analytical information.</p></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-3" type="checkbox"/><label class="form-check-label" for="form-check-input-3">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/2.png" width="100%"/></div><div class="example-block"><span>Rescue operations have been launched    to reach <span style="background-color:rgba(255,0,0,0.3)">people</span>  stranded <span style="background-color:rgba(255,0,0,0.3)">in</span> <span style="background-color:rgba(255,0,0,0.3)">flooded</span> <span style="background-color:rgba(255,0,0,0.3)">villages</span> <span style="background-color:rgba(255,0,0,0.3)">and</span>     trapped in <span style="background-color:rgba(255,0,0,0.3)">the</span> debris .→Rescue operations have been launched <span style="background-color:rgba(0,255,0,0.3)">in</span> <span style="background-color:rgba(0,255,0,0.3)">both</span> <span style="background-color:rgba(0,255,0,0.3)">states</span> to reach  <span style="background-color:rgba(0,255,0,0.3)">those</span> stranded     <span style="background-color:rgba(0,255,0,0.3)">by</span> <span style="background-color:rgba(0,255,0,0.3)">the</span> <span style="background-color:rgba(0,255,0,0.3)">flooding</span> <span style="background-color:rgba(0,255,0,0.3)">or</span> trapped in  debris .</span></div><div class="explanation"><h5>Explanation:</h5><p>This edit is <i>Emphasizing a fact</i> because it attempts to clarify the launching location (i.e. “in both states”). It is not a <i>Background Elaboration</i> because “in both states” is not new information, but information that is ignored or assumed to be known in the first version. It also involves <i>Tonal Edit</i> because the latter part of the sentence has been refactored. It is not a <i>Style-guided Edit</i> because the refactoring is not fixing violations of style guides.</p></div></div></div></div></div><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-3" type="button"><h3>Sensitivity Consideration</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-3"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>The journalist rewrote the sentence because the original version is inappropriate/ may be considered insensitive.</p></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-4" type="checkbox"/><label class="form-check-label" for="form-check-input-4">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/3.png" width="100%"/></div><div class="example-block"><span>Sousse sits on the Mediterranean Sea and is <span style="background-color:rgba(255,0,0,0.3)">a</span>  popular <span style="background-color:rgba(255,0,0,0.3)">tourist</span> <span style="background-color:rgba(255,0,0,0.3)">destination</span> with <span style="background-color:rgba(255,0,0,0.3)">fine</span> <span style="background-color:rgba(255,0,0,0.3)">sandy</span> <span style="background-color:rgba(255,0,0,0.3)">beaches</span>    and <span style="background-color:rgba(255,0,0,0.3)">large</span> <span style="background-color:rgba(255,0,0,0.3)">hotel</span> <span style="background-color:rgba(255,0,0,0.3)">complexes</span>                .→Sousse sits on the Mediterranean Sea and is  <span style="background-color:rgba(0,255,0,0.3)">highly</span> popular   with    <span style="background-color:rgba(0,255,0,0.3)">British</span> <span style="background-color:rgba(0,255,0,0.3)">tourists</span> <span style="background-color:rgba(0,255,0,0.3)">,</span> and    <span style="background-color:rgba(0,255,0,0.3)">is</span> <span style="background-color:rgba(0,255,0,0.3)">cited</span> <span style="background-color:rgba(0,255,0,0.3)">on</span> <span style="background-color:rgba(0,255,0,0.3)">holiday</span> <span style="background-color:rgba(0,255,0,0.3)">operator</span> <span style="background-color:rgba(0,255,0,0.3)">Thomson</span> <span style="background-color:rgba(0,255,0,0.3)">'s</span> <span style="background-color:rgba(0,255,0,0.3)">list</span> <span style="background-color:rgba(0,255,0,0.3)">of</span> <span style="background-color:rgba(0,255,0,0.3)">prime</span> <span style="background-color:rgba(0,255,0,0.3)">destinations</span> <span style="background-color:rgba(0,255,0,0.3)">for</span> <span style="background-color:rgba(0,255,0,0.3)">Britons</span> <span style="background-color:rgba(0,255,0,0.3)">in</span> <span style="background-color:rgba(0,255,0,0.3)">Tunisia</span> .</span></div><div class="explanation"><h5>Explanation:</h5><p>The article is about an attack that leads to deaths in Sousse but the first version describes how good the beaches are, which is inappropriate.</p></div></div></div></div></div></div><div class="top-level-category"><h2>Copy Editing</h2><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-4" type="button"><h3>Style-guide Edits</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-4"><div class="card-body"><div class="definition "><h4>Definition: </h4><p>Edits where the first version violates a style guide and the revised version fixes it.</p></div><div class="example "><h4>Example: </h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-5" type="checkbox"/><label class="form-check-label" for="form-check-input-5">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/4.png" width="100%"/></div><div class="example-block"><span><span style="background-color:rgba(255,0,0,0.3)">It</span>    followed a previous incident that year when two teenage girls were barred from boarding a flight for wearing leggings .→ <span style="background-color:rgba(0,255,0,0.3)">The</span> <span style="background-color:rgba(0,255,0,0.3)">Chicago</span> <span style="background-color:rgba(0,255,0,0.3)">flight</span> followed a previous incident that year when two teenage girls were barred from boarding a flight for wearing leggings .</span></div><div class="explanation"><h5>Explanation:</h5><p>In the first version, the journalist uses “It” to refer to “The Chicago flight”, which was not mentioned prior in the article, which violates the style guide. This edit is not a <i>Tonal Edits</i> because the edit does fix a style guide violation and not because of preferences of word choices.</p></div></div></div></div></div><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-5" type="button"><h3>Tonal Edits</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-5"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>The journalist made the edits because of word choice preferences.</p></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-6" type="checkbox"/><label class="form-check-label" for="form-check-input-6">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/5.png" width="100%"/></div><div class="example-block"><span>Mr. Munoz 's original <span style="background-color:rgba(255,0,0,0.3)">succession</span> <span style="background-color:rgba(255,0,0,0.3)">plan</span>  to <span style="background-color:rgba(255,0,0,0.3)">become</span>    chairman was scuttled in 2017 after intense public backlash when a passenger , Dr. David Dao , was dragged off a United Airlines flight by a police officer       .→Mr. Munoz 's original  <span style="background-color:rgba(0,255,0,0.3)">planed</span> <span style="background-color:rgba(0,255,0,0.3)">promotion</span> to  <span style="background-color:rgba(0,255,0,0.3)">the</span> <span style="background-color:rgba(0,255,0,0.3)">role</span> <span style="background-color:rgba(0,255,0,0.3)">of</span> chairman was scuttled in 2017 after intense public backlash when a passenger , Dr. David Dao , was dragged off a United Airlines flight by a police officer <span style="background-color:rgba(0,255,0,0.3)">at</span> <span style="background-color:rgba(0,255,0,0.3)">O'Hare</span> <span style="background-color:rgba(0,255,0,0.3)">International</span> <span style="background-color:rgba(0,255,0,0.3)">Airport</span> <span style="background-color:rgba(0,255,0,0.3)">in</span> <span style="background-color:rgba(0,255,0,0.3)">Chicago</span> .</span></div><div class="explanation"><h5>Explanation: </h5><p>Here the use of “succession plan” and “become” does not violate any style guidelines or grammar. Hence, this edit is not a <i>Style-guided Edit</i> or <i>Syntax Correction</i>, but a <i>Tonal Edit</i>. The edit also involves <i>Emphasizing a fact</i> as the journalist attempts to clarify where the officer is from at the end of the sentence.</p></div></div></div></div></div><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-7" type="button"><h3>Syntax Correction</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-7"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>Improve grammar, spelling, or punctuation.</p></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-8" type="checkbox"/><label class="form-check-label" for="form-check-input-8">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/6.png" width="100%"/></div><div class="example-block"><span><span style="background-color:rgba(255,0,0,0.3)">One</span>  eyewitness told BBC News : <span style="background-color:rgba(255,0,0,0.3)">''</span>  I came forward and I saw him on the back seat . It was definitely Prince Charles , no doubt about it . <span style="background-color:rgba(255,0,0,0.3)">''</span> They tried to protect him but there was too many of them .               → <span style="background-color:rgba(0,255,0,0.3)">Another</span> eyewitness told BBC News :  <span style="background-color:rgba(0,255,0,0.3)">“</span> I came forward and I saw him on the back seat . It was definitely Prince Charles , no doubt about it .  They tried to protect him but there was too many of them . <span style="background-color:rgba(0,255,0,0.3)">”</span> <span style="background-color:rgba(0,255,0,0.3)">The</span> <span style="background-color:rgba(0,255,0,0.3)">car</span> <span style="background-color:rgba(0,255,0,0.3)">behind</span> <span style="background-color:rgba(0,255,0,0.3)">,</span> <span style="background-color:rgba(0,255,0,0.3)">an</span> <span style="background-color:rgba(0,255,0,0.3)">official</span> <span style="background-color:rgba(0,255,0,0.3)">royal</span> <span style="background-color:rgba(0,255,0,0.3)">Jaguar</span> <span style="background-color:rgba(0,255,0,0.3)">,</span> <span style="background-color:rgba(0,255,0,0.3)">also</span> <span style="background-color:rgba(0,255,0,0.3)">came</span> <span style="background-color:rgba(0,255,0,0.3)">under</span> <span style="background-color:rgba(0,255,0,0.3)">attack</span> <span style="background-color:rgba(0,255,0,0.3)">.</span></span></div><div class="explanation"><h5>Explanation: </h5><p>This is a <i>Syntax Correction</i> because in the first version, “They tried to protect him but there were too many of them.” is mistakenly being included as part of the quote, which is fixed in the second version. This is not a <i>Tonal Edit</i> or a <i>Style-guided Edit</i> because the rest of the sentence is not refactored and the edit does not attempt to fix a violation of style guidelines.</p></div></div></div></div></div></div><div class="top-level-category"><h2>Elaboration </h2><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-8" type="button"><h3>Background</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-8"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>Add additional information to the article that is not analytical.</p></div><div class="example "><h4>Example: </h4><div class="example-block"><span>“ <span style="background-color:rgba(255,0,0,0.3)">Sousse</span> sits on the Mediterranean Sea and is <span style="background-color:rgba(255,0,0,0.3)">a</span>  popular <span style="background-color:rgba(255,0,0,0.3)">tourist</span> <span style="background-color:rgba(255,0,0,0.3)">destination</span> with <span style="background-color:rgba(255,0,0,0.3)">fine</span> <span style="background-color:rgba(255,0,0,0.3)">sandy</span> <span style="background-color:rgba(255,0,0,0.3)">beaches</span>    and <span style="background-color:rgba(255,0,0,0.3)">large</span> <span style="background-color:rgba(255,0,0,0.3)">hotel</span> <span style="background-color:rgba(255,0,0,0.3)">complexes</span>                . ”→“ <span style="background-color:rgba(0,255,0,0.3)">​​Sousse</span> sits on the Mediterranean Sea and is  <span style="background-color:rgba(0,255,0,0.3)">highly</span> popular   with    <span style="background-color:rgba(0,255,0,0.3)">British</span> <span style="background-color:rgba(0,255,0,0.3)">tourists</span> <span style="background-color:rgba(0,255,0,0.3)">,</span> and    <span style="background-color:rgba(0,255,0,0.3)">is</span> <span style="background-color:rgba(0,255,0,0.3)">cited</span> <span style="background-color:rgba(0,255,0,0.3)">on</span> <span style="background-color:rgba(0,255,0,0.3)">holiday</span> <span style="background-color:rgba(0,255,0,0.3)">operator</span> <span style="background-color:rgba(0,255,0,0.3)">Thomson</span> <span style="background-color:rgba(0,255,0,0.3)">'s</span> <span style="background-color:rgba(0,255,0,0.3)">list</span> <span style="background-color:rgba(0,255,0,0.3)">of</span> <span style="background-color:rgba(0,255,0,0.3)">prime</span> <span style="background-color:rgba(0,255,0,0.3)">destinations</span> <span style="background-color:rgba(0,255,0,0.3)">for</span> <span style="background-color:rgba(0,255,0,0.3)">Britons</span> <span style="background-color:rgba(0,255,0,0.3)">in</span> <span style="background-color:rgba(0,255,0,0.3)">Tunisia</span> . ”</span></div><div class="explanation"><h5>Explanation:</h5><p>In this example, the author provides additional information about ​​Sousse. Hence, the edit is an Elaboration - Background. It is not an Elaboration - Analysis because the new information introduced is not analysis derived from/ inferred by the journalist. </p></div></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-9" type="checkbox"/><label class="form-check-label" for="form-check-input-9">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/8.png" width="100%"/></div><div class="example-block"><span style="background-color:rgba(0,255,0,0.3)">Video of the incident, which captured the rough treatment of Dr. Dao being removed from the overbooked flight to make room for airline employees, went viral on social media. “The airline was harshly criticized for how it handled the crisis.”</span></div><div class="explanation"><h5>Explanation:</h5><p>The article is breaking news. These new edits provide more additional information about the event. Hence, the edit is an <i>Elaboration - Background</i>. It is not an <i>Elaboration - Analysis</i> because the new information introduced is not analysis derived from/ inferred by the journalist. </p></div></div></div></div></div><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-9" type="button"><h3>Analysis</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-9"><div class="card-body"><div class="definition "><h4>Definition: </h4><p>The writer derives meaningful inferences from the presented information.</p></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-10" type="checkbox"/><label class="form-check-label" for="form-check-input-10">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/9.png" width="100%"/></div><div class="example-block"><span><span style="background-color:rgba(255,0,0,0.3)">For</span>  the first <span style="background-color:rgba(255,0,0,0.3)">five</span>  months of <span style="background-color:rgba(255,0,0,0.3)">the</span> <span style="background-color:rgba(255,0,0,0.3)">fiscal</span>   year , the deficit              -    <span style="background-color:rgba(255,0,0,0.3)">the</span> <span style="background-color:rgba(255,0,0,0.3)">gap</span> <span style="background-color:rgba(255,0,0,0.3)">between</span> <span style="background-color:rgba(255,0,0,0.3)">the</span> <span style="background-color:rgba(255,0,0,0.3)">government</span> <span style="background-color:rgba(255,0,0,0.3)">'s</span> <span style="background-color:rgba(255,0,0,0.3)">revenues</span> <span style="background-color:rgba(255,0,0,0.3)">and</span> <span style="background-color:rgba(255,0,0,0.3)">spending</span> <span style="background-color:rgba(255,0,0,0.3)">-</span> <span style="background-color:rgba(255,0,0,0.3)">came</span> <span style="background-color:rgba(255,0,0,0.3)">in</span> <span style="background-color:rgba(255,0,0,0.3)">at</span> $  <span style="background-color:rgba(255,0,0,0.3)">349</span> <span style="background-color:rgba(255,0,0,0.3)">billon</span> <span style="background-color:rgba(255,0,0,0.3)">,</span> <span style="background-color:rgba(255,0,0,0.3)">down</span> <span style="background-color:rgba(255,0,0,0.3)">from</span> <span style="background-color:rgba(255,0,0,0.3)">$</span> <span style="background-color:rgba(255,0,0,0.3)">351.3</span> billion <span style="background-color:rgba(255,0,0,0.3)">a</span> <span style="background-color:rgba(255,0,0,0.3)">year</span> <span style="background-color:rgba(255,0,0,0.3)">earlier</span> .→ <span style="background-color:rgba(0,255,0,0.3)">Through</span> the first  <span style="background-color:rgba(0,255,0,0.3)">six</span> months of   <span style="background-color:rgba(0,255,0,0.3)">this</span> <span style="background-color:rgba(0,255,0,0.3)">budget</span> year , the deficit <span style="background-color:rgba(0,255,0,0.3)">totals</span> <span style="background-color:rgba(0,255,0,0.3)">$</span> <span style="background-color:rgba(0,255,0,0.3)">526.9</span> <span style="background-color:rgba(0,255,0,0.3)">billion</span> <span style="background-color:rgba(0,255,0,0.3)">,</span> <span style="background-color:rgba(0,255,0,0.3)">up</span> <span style="background-color:rgba(0,255,0,0.3)">14.7</span> <span style="background-color:rgba(0,255,0,0.3)">percent</span> <span style="background-color:rgba(0,255,0,0.3)">from</span> <span style="background-color:rgba(0,255,0,0.3)">last</span> <span style="background-color:rgba(0,255,0,0.3)">year</span> <span style="background-color:rgba(0,255,0,0.3)">'s</span> <span style="background-color:rgba(0,255,0,0.3)">six</span> - <span style="background-color:rgba(0,255,0,0.3)">month</span> <span style="background-color:rgba(0,255,0,0.3)">total</span> <span style="background-color:rgba(0,255,0,0.3)">of</span>              $ <span style="background-color:rgba(0,255,0,0.3)">459.4</span>        billion    .</span></div><div class="explanation"><h5>Explanation:</h5><p>This edit is an <i>Elaboration - Analysis</i> because “up 14.7 percent” is the analysis made by the journalist. This is also an <i>Elaboration - Background</i> because the new version includes additional information about the deficit through the first six months which is not mentioned in the previous version. Additionally, this edit involves <i>Fact Update -  Deletion with addition</i> as we see that the deficit for the first five months is removed from the first version because the new version talks about deficit for the first six months.</p></div></div></div></div></div></div><div class="top-level-category"><h2>Story Update</h2><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-10" type="button"><h3>Event Update</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-10"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>There is a change in world state and the edit involves an update to an event. Usually, there are changes to verbs.</p></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-11" type="checkbox"/><label class="form-check-label" for="form-check-input-11">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/10.png" width="100%"/></div><div class="example-block"><span><span style="background-color:rgba(255,0,0,0.3)">A</span> <span style="background-color:rgba(255,0,0,0.3)">teacher</span> <span style="background-color:rgba(255,0,0,0.3)">,</span> Wissam Zarqa , <span style="background-color:rgba(255,0,0,0.3)">says</span>     his senses sometimes play tricks on him           .→   Wissam Zarqa ,  <span style="background-color:rgba(0,255,0,0.3)">a</span> <span style="background-color:rgba(0,255,0,0.3)">teacher</span> <span style="background-color:rgba(0,255,0,0.3)">,</span> <span style="background-color:rgba(0,255,0,0.3)">said</span> his senses sometimes play tricks on him <span style="background-color:rgba(0,255,0,0.3)">--</span> <span style="background-color:rgba(0,255,0,0.3)">he</span> <span style="background-color:rgba(0,255,0,0.3)">hears</span> <span style="background-color:rgba(0,255,0,0.3)">warplanes</span> <span style="background-color:rgba(0,255,0,0.3)">overhead</span> <span style="background-color:rgba(0,255,0,0.3)">even</span> <span style="background-color:rgba(0,255,0,0.3)">when</span> <span style="background-color:rgba(0,255,0,0.3)">none</span> <span style="background-color:rgba(0,255,0,0.3)">are</span> <span style="background-color:rgba(0,255,0,0.3)">there</span> .</span></div><div class="explanation"><h5>Explanation:</h5><p>This edit is an <i>Event Update</i> because we see that the tense is changed from present tense to past tense (says -&gt; said). In addition, it also involves <i>Copy Editing - Tonal Edits</i> (because the sentence is refactored) and <i>Elaboration  - Background</i> (because additional non-analytical information about how Wissam’s senses play tricks on him is elaborated).</p></div></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-11" type="checkbox"/><label class="form-check-label" for="form-check-input-11">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/11.png" width="100%"/></div><div class="example-block"><span>A state minister <span style="background-color:rgba(255,0,0,0.3)">had</span> said it <span style="background-color:rgba(255,0,0,0.3)">is</span>  the worst flooding in the state since 1998 .→A state minister  said it  <span style="background-color:rgba(0,255,0,0.3)">was</span> the worst flooding in the state since 1998 .</span></div><div class="explanation"><h5>Explanation:</h5><p>There is a change in the sentence’s tense (from past perfect tense to past tense). It does not involve <i>Copy Editing - Tonal Edits</i> because the sentence structure is largely the same. It also does not involve any <i>Elaboration</i> intention because no additional information is introduced.</p></div></div></div></div></div><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-11" type="button"><h3>Quote Update</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-11"><div class="card-body"><div class="definition "><h4>Definition: </h4><p>There is an addition of quotes in the article. </p></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-12" type="checkbox"/><label class="form-check-label" for="form-check-input-12">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/12.png" width="100%"/></div><div class="example-block"><span style="background-color:rgba(0,255,0,0.3)">''I said, 'It's Camilla'. I wasn't trying to alert them.</span></div><div class="explanation"><h5>Explanation:</h5><p>This edit is a <i>Quote Update</i> because a quote is added. This is also an <i>Elaboration - Background</i> because the quote itself can be viewed as new information introduced and the information is not analytical.</p></div></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-12" type="checkbox"/><label class="form-check-label" for="form-check-input-12">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/13.png" width="100%"/></div><div class="example-block"><span style="background-color:rgba(0,255,0,0.3)">People started kicking the car,'' he said. He added that the prince remained calm, ''waving and giving the thumbs up''.</span></div><div class="explanation"><h5>Explanation:</h5><p>This edit is a <i>Quote Update</i> because a quote is added. This is also an <i>Elaboration - Background</i> because the quote itself can be viewed as new information introduced and the information is not analytical.</p></div></div></div></div></div><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-12" type="button"><h3>Document Update</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-12"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>Any addition of information that does not fall into the category of quote update or event update.</p></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-13" type="checkbox"/><label class="form-check-label" for="form-check-input-13">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/14.png" width="100%"/></div><div class="example-block"><span style="background-color:rgba(0,255,0,0.3)">Germany has been critical of the Trump administration's climate policy and escalating rhetoric on North Korea, while the U.S. has questioned Germany's large trade surplus, among other issues.</span></div><div class="explanation"><h5>Explanation:</h5><p>This edit is a <i>Document Update</i> because no quote or event is added or updated. This is also an <i>Elaboration - Background</i> because the quote itself can be viewed as new information introduced and the information is not analytical.</p></div></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-13" type="checkbox"/><label class="form-check-label" for="form-check-input-13">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/15.png" width="100%"/></div><div class="example-block"><span style="background-color:rgba(0,255,0,0.3)">Astronauts and cosmonauts routinely take small items such as their children's toys or CDs with them as reminders of home.</span></div><div class="explanation"><h5>Explanation:</h5><p>This edit is a <i>Document Update</i> because no quote or event is added or updated. This is also an <i>Elaboration - Background</i> because the quote itself can be viewed as new information introduced and the information is not analytical.</p></div></div></div></div></div></div><div class="top-level-category"><h2>Verification</h2><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-13" type="button"><h3>Correction</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-13"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>There are factual errors in the original version. The new version corrects the error.</p></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-14" type="checkbox"/><label class="form-check-label" for="form-check-input-14">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/16.png" width="100%"/></div><div class="example-block"><span>Fifteen people were arrested on suspicion of conspiracy to manage and control brothels after raids on homes in the Midlands and south of England on Tuesday and <span style="background-color:rgba(255,0,0,0.3)">Wednesday</span>  .→Fifteen people were arrested on suspicion of conspiracy to manage and control brothels after raids on homes in the Midlands and south of England on Tuesday and  <span style="background-color:rgba(0,255,0,0.3)">Thursday</span> .</span></div><div class="explanation"><h5>Explanation:</h5><p>The original version states “Tuesday and Wednesday”, which is corrected to “Tuesday and Thursday” in the next version. This is not a Fact Update because the information is inaccurate in the first version.</p></div></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-14" type="checkbox"/><label class="form-check-label" for="form-check-input-14">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/17.png" width="100%"/></div><div class="example-block"><span>A teacher has opened fire at an education department office in Saudi Arabia's southern Jazan province, killing six colleagues, officials have said.</span></div><div class="explanation"><h5>Explanation:</h5><p>In the updated version, we see that we are not 100% sure the suspect is a teacher. Hence a <i>Verification - Correction</i> edit.</p></div></div></div></div></div><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-14" type="button"><h3>Additional Sourcing</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-14"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>The new version includes new sources for additional information. Sometimes, new sources are added for confirmation purposes.</p></div></div></div></div></div><div class="top-level-category"><h2>Fact Deletion</h2><div class="second-level-category card"><div class="card-header"><button aria-expanded="false" class="btn btn-link collapsed" data-bs-toggle="collapse" href="#second-level-card-15" type="button"><h3>Deletion with addition involved</h3></button></div><div class="collapse" data-parent="#accordion" id="second-level-card-15"><div class="card-body"><div class="definition"><h4>Definition:</h4><p>The deletion is to make room for `addition` operations. The `addition` operations involves an update to a quote/event/document or elaboration.</p></div><div class="example"><h4>Example:</h4><div class="example-image"><div class="form-check form-switch"><input class="form-check-input image-show" id="form-check-input-16" type="checkbox"/><label class="form-check-label" for="form-check-input-16">Show example image</label></div><img class="hidden" src="https://cdn.jsdelivr.net/gh/alex2awesome/edit-intentions@master/app/static/assets/img/18.png" width="100%"/></div><div class="example-block"><span style="background-color:rgba(255,0,0,0.3)">INDIANAPOLIS (AP) -- Authorities say an argument between two Indianapolis-area neighbors, including one riding a lawnmower, escalated into across-the-fence gunfire.</span></div><div class="explanation"><h5>Explanation:</h5><p>This sentence is deleted because the writer now has more information about the event (e.g. Weigle is charged)</p></div></div></div></div></div></div>
                     </div>
                 </div>
               </div>
               <div class="card">
                 <div class="card-header" id="headingOne">
                   <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" type="button" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" type="button" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                       Video
                     </button>
                   </h5>
@@ -113,7 +98,7 @@
               <div class="card">
                 <div class="card-header" id="headingOne">
                   <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" type="button" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" type="button" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                       Examples
                     </button>
                   </h5>
@@ -169,46 +154,6 @@
                             <a target='_blank' rel='noopener noreferrer' href="">https://news-edits-dot-usc-research.appspot.com/check_task?source=bbc&doc_id=1248390&v_x=1&v_y=2</a>
                         </div>
                         This article is really dense. There are a lot of time-dependent numbers here, so it's likely that a lot of them will be updated. Also, an additional viewpoint is added.
-                    </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="todoHeader">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" type="button" data-target="#toDo" aria-expanded="false" aria-controls="collapseThree">
-                      TO-DO Before Launch
-                    </button>
-                  </h5>
-                </div>
-                <div id="toDo" class="collapse" aria-labelledby="todoHeader" data-parent="#accordion">
-                    <div class="card-body">
-                        We have the following items on our to-do list for the interface before we launch it:
-                        <br>
-                        <br>
-                        <ul>
-                            <li>Task Semantics:
-                                <ul>
-                                    <li>Finalize schema with appropriate addition/deletion/edit sub-schemas</li>
-                                    <li>Write instructions</li>
-                                </ul>
-                            </li>
-                            <li>Annotation: Annotate a subset of documents ourselves, in order to:
-                                <ul>
-                                    <li>Collect good challenging/interesting/pedagogical examples for the instructions.</li>
-                                    <li>Collect a gold dataset with which to recruit workers.</li>
-                                </ul>
-                            </li>
-                            <li>Visual/Technical Interface Upgrades:
-                                <ul>
-                                    <li>Put labels for edit-dropdown on the bezier-curves </li>
-                                    <li>Put an additional textfield or dropdown in each addition/deletion box so that the user can note if the addition/deletion corresponds to an update.</li>
-                                    <li>Put an additional "+" sign by each dropdown so that we can allow users to add >1 intention per edit.</li>
-                                    <li>Make the entire layout response to size-changes for dropdowns results from the previous two changes.</li>
-                                    <li>Make sure we're collecting all the data on submission, test on Amazon.</li>
-                                </ul>
-                            </li>
-
-                        </ul>
                     </div>
                 </div>
               </div>
@@ -348,6 +293,14 @@
     body{
         margin: 10px !important;
     }
+
+    h2 {
+        font-size: calc(1.3rem + .1vw);
+    }
+
+    h3 {
+        font-size: calc(.9rem + .1vw);
+    }
 </style>
 
     <form name='mturk_form' method='post' id='mturk_form' action='/mturk/externalSubmit'>
@@ -377,14 +330,78 @@
 
 <script language='Javascript'>
 
+
+    class InstructionsManager{
+        constructor(data){
+            this.data = data
+        }
+
+        draw(){
+            var that = this
+            var top_level_node = $('#inner-instructions')
+            this.data.forEach(function(d){
+                var second_level_elem = that.format_block(d, that)
+                $(top_level_node).append(second_level_elem)
+            })
+        }
+
+        format_block(datum, cls){
+            // special formatting
+            var elem;
+            if ( datum['class'] == 'second-level-category')
+                elem = cls.create_second_level_category(datum)
+            else if (datum['class'] == 'example-block')
+                elem = cls.process_example_block(datum)
+            else
+                elem = cls.create_div_basic(datum['content']['type'], datum['class'], datum['content']['content'])
+            for (var i = 0; i < datum.children.length; i++){
+                var child_elem = cls.format_block(datum.children[i], cls)
+                $(elem).append(child_elem)
+            }
+            return elem
+        }
+
+        create_div_basic(elem_type, classname, elem_content){
+            const new_div = document.createElement("div");
+            const new_elem = document.createElement(elem_type);
+            const new_content = document.createTextNode(elem_content)
+            $(new_div).addClass(classname)
+            $(new_elem).append(new_content)
+            $(new_div).append(new_elem)
+            return new_div
+        }
+
+        process_example_block(datum){
+            var content = datum['content']
+        }
+
+        create_second_level_category(datum){
+
+        }
+
+    }
+
+    // for the instructions
+    $('.image-show').on('click', function(d){
+        var img = $(this).parents('.example-image').find('img')
+        var is_hidden = $(img).hasClass('hidden')
+        if (is_hidden)
+            $(img).removeClass('hidden')
+        else
+            $(img).addClass('hidden')
+    })
+
     var edit_select_html =`
         <select class="edit-intention form-select">
             <option value="" selected disabled></option>
             <option value="" disabled>Clarification</option>
             <option value="">&#160;&#160;&#160;Simplification</option>
             <option value="">&#160;&#160;&#160;Define term</option>
+            <option value="">&#160;&#160;&#160;Emphasize a Point</option>
+            <option value="">&#160;&#160;&#160;Sensitivity Consideration</option>
             <option value="" disabled>Copy Editing</option>
-            <option value="">&#160;&#160;&#160;Style Changes</option>
+            <option value="">&#160;&#160;&#160;Style-Guide Edits</option>
+            <option value="">&#160;&#160;&#160;Tonal Edits</option>
             <option value="">&#160;&#160;&#160;Syntax Correction</option>
             <option value="" disabled>Elaboration</option>
             <option value="">&#160;&#160;&#160;Background</option>
@@ -393,6 +410,54 @@
             <option value="">&#160;&#160;&#160;Event Update</option>
             <option value="">&#160;&#160;&#160;Quote Update</option>
             <option value="">&#160;&#160;&#160;Document Update</option>
+            <option value="" disabled>Verification</option>
+            <option value="">&#160;&#160;&#160;Correction</option>
+            <option value="">&#160;&#160;&#160;Additional Sourcing</option>
+        </select>
+    `
+    var deletion_html = `
+        <select class="edit-intention form-select">
+            <option value="" selected disabled></option>
+            <option value="" disabled>Clarification</option>
+            <option value="">&#160;&#160;&#160;Simplification</option>
+            <option value="">&#160;&#160;&#160;Define term</option>
+            <option value="">&#160;&#160;&#160;Emphasize a Point</option>
+            <option value="">&#160;&#160;&#160;Sensitivity Consideration</option>
+            <option value="" disabled>Copy Editing</option>
+            <option value="">&#160;&#160;&#160;Style-Guide Edits</option>
+            <option value="">&#160;&#160;&#160;Tonal Edits</option>
+            <option value="">&#160;&#160;&#160;Syntax Correction</option>
+            <option value="" disabled>Elaboration</option>
+            <option value="">&#160;&#160;&#160;Background</option>
+            <option value="">&#160;&#160;&#160;Analysis</option>
+            <option value="" disabled>Fact Deletion</option>
+            <option value="">&#160;&#160;&#160;Fact Deletion</option>
+            <option value="">&#160;&#160;&#160;Fact Deletion with Addition</option>
+            <option value="" disabled>Verification</option>
+            <option value="">&#160;&#160;&#160;Correction</option>
+            <option value="">&#160;&#160;&#160;Additional Sourcing</option>
+        </select>
+    `
+
+    var add_select_html =`
+        <select class="edit-intention form-select">
+            <option value="" selected disabled></option>
+            <option value="" disabled>Clarification</option>
+            <option value="">&#160;&#160;&#160;Simplification</option>
+            <option value="">&#160;&#160;&#160;Define term</option>
+            <option value="">&#160;&#160;&#160;Emphasize a Point</option>
+            <option value="">&#160;&#160;&#160;Sensitivity Consideration</option>
+            <option value="" disabled>Copy Editing</option>
+            <option value="">&#160;&#160;&#160;Style-Guide Edits</option>
+            <option value="">&#160;&#160;&#160;Tonal Edits</option>
+            <option value="">&#160;&#160;&#160;Syntax Correction</option>
+            <option value="" disabled>Elaboration</option>
+            <option value="">&#160;&#160;&#160;Background</option>
+            <option value="">&#160;&#160;&#160;Analysis</option>
+            <option value="" disabled>Fact Addition</option>
+            <option value="">&#160;&#160;&#160;Event Addition</option>
+            <option value="">&#160;&#160;&#160;Quote Addition</option>
+            <option value="">&#160;&#160;&#160;Document Addition</option>
             <option value="" disabled>Verification</option>
             <option value="">&#160;&#160;&#160;Correction</option>
             <option value="">&#160;&#160;&#160;Additional Sourcing</option>
@@ -521,7 +586,6 @@
             }
 
             var that = this
-
             return rows_obj
                     .append('div').classed('textblockwrapper', true).classed('col-6', true) // so that the margin goes on the inside
                     .append('div').classed('textblock', true)
@@ -535,6 +599,7 @@
                     .append('span').classed('textblock_span', true)
                     //.text(d => d.sentence)
                     .html(d=>_helper_get_textblock_html(d, that))
+
         }
 
         _draw_labelblocks(rows_obj, version){

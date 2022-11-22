@@ -44,6 +44,10 @@ def render_task():
     else:
         template = 'templates/visualize-doc-level-edits-d3.html'
 
+    instructions_html_file = 'static/assets/instructions.html'
+    with open(instructions_html_file) as f:
+        instructions_html = f.read()
+
     if doc_id is not None and v_x is not None and v_y is not None:
         k = str((source, int(doc_id), int(v_x), int(v_y)))
     else:
@@ -66,6 +70,7 @@ def render_task():
 
     return render_template(
         template,
+        instructions=instructions_html,
         data=datum,
         doc_id=k,
         do_mturk=False,

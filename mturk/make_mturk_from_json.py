@@ -16,13 +16,15 @@ def render_page(
         template_folder=None,
         template_fn=None,
         output_dir=None,
-        args=None
+        cmd_args=None,
+        *args,
+        **kwargs,
 ):
-    assert (args is not None ) or not (template_folder is None or template_fn is None or output_dir is None)
-    if args is not None:
-        template_folder = args.template_folder
-        template_fn = args.template
-        output_dir = args.out_dir
+    assert (cmd_args is not None ) or not (template_folder is None or template_fn is None or output_dir is None)
+    if cmd_args is not None:
+        template_folder = cmd_args.template_folder
+        template_fn = cmd_args.template
+        output_dir = cmd_args.out_dir
 
     env = Environment(
         loader=FileSystemLoader(template_folder),
@@ -35,6 +37,7 @@ def render_page(
         doc_id=data_id,
         do_mturk=True,
         start_time=str(datetime.datetime.now()),
+        **kwargs
     )
     task_label = "task-{}".format(data_id)
     if write:

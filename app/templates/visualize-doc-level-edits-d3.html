@@ -86,6 +86,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body" id="inner-instructions">
                         <!-- actual instructions will go here. -->
+                        {{ instructions | safe  }}
                     </div>
                 </div>
               </div>
@@ -393,26 +394,14 @@
 
     }
 
-    {% if  do_mturk %}
-        var instructions_path = ""
-    {% else %}
-        var instructions_path = "{{  url_for('static', filename='assets/instructions.html') }}"
-    {% endif %}
-
-    d3.text(instructions_path).then(function(html_str){
-        var child = document.createElement('div');
-        child.innerHTML = html_str;
-//        child = child.firstChild;
-        document.getElementById('inner-instructions').appendChild(child);
-
-        $('.image-show').on('click', function(d){
-            var img = $(this).parents('.example-image').find('img')
-            var is_hidden = $(img).hasClass('hidden')
-            if (is_hidden)
-                $(img).removeClass('hidden')
-            else
-                $(img).addClass('hidden')
-        })
+    // for the instructions
+    $('.image-show').on('click', function(d){
+        var img = $(this).parents('.example-image').find('img')
+        var is_hidden = $(img).hasClass('hidden')
+        if (is_hidden)
+            $(img).removeClass('hidden')
+        else
+            $(img).addClass('hidden')
     })
 
     var edit_select_html =`
@@ -421,8 +410,11 @@
             <option value="" disabled>Clarification</option>
             <option value="">&#160;&#160;&#160;Simplification</option>
             <option value="">&#160;&#160;&#160;Define term</option>
+            <option value="">&#160;&#160;&#160;Emphasize a Point</option>
+            <option value="">&#160;&#160;&#160;Sensitivity Consideration</option>
             <option value="" disabled>Copy Editing</option>
-            <option value="">&#160;&#160;&#160;Style Changes</option>
+            <option value="">&#160;&#160;&#160;Style-Guide Edits</option>
+            <option value="">&#160;&#160;&#160;Tonal Edits</option>
             <option value="">&#160;&#160;&#160;Syntax Correction</option>
             <option value="" disabled>Elaboration</option>
             <option value="">&#160;&#160;&#160;Background</option>
@@ -431,6 +423,54 @@
             <option value="">&#160;&#160;&#160;Event Update</option>
             <option value="">&#160;&#160;&#160;Quote Update</option>
             <option value="">&#160;&#160;&#160;Document Update</option>
+            <option value="" disabled>Verification</option>
+            <option value="">&#160;&#160;&#160;Correction</option>
+            <option value="">&#160;&#160;&#160;Additional Sourcing</option>
+        </select>
+    `
+    var deletion_html = `
+        <select class="edit-intention form-select">
+            <option value="" selected disabled></option>
+            <option value="" disabled>Clarification</option>
+            <option value="">&#160;&#160;&#160;Simplification</option>
+            <option value="">&#160;&#160;&#160;Define term</option>
+            <option value="">&#160;&#160;&#160;Emphasize a Point</option>
+            <option value="">&#160;&#160;&#160;Sensitivity Consideration</option>
+            <option value="" disabled>Copy Editing</option>
+            <option value="">&#160;&#160;&#160;Style-Guide Edits</option>
+            <option value="">&#160;&#160;&#160;Tonal Edits</option>
+            <option value="">&#160;&#160;&#160;Syntax Correction</option>
+            <option value="" disabled>Elaboration</option>
+            <option value="">&#160;&#160;&#160;Background</option>
+            <option value="">&#160;&#160;&#160;Analysis</option>
+            <option value="" disabled>Fact Deletion</option>
+            <option value="">&#160;&#160;&#160;Fact Deletion</option>
+            <option value="">&#160;&#160;&#160;Fact Deletion with Addition</option>
+            <option value="" disabled>Verification</option>
+            <option value="">&#160;&#160;&#160;Correction</option>
+            <option value="">&#160;&#160;&#160;Additional Sourcing</option>
+        </select>
+    `
+
+    var add_select_html =`
+        <select class="edit-intention form-select">
+            <option value="" selected disabled></option>
+            <option value="" disabled>Clarification</option>
+            <option value="">&#160;&#160;&#160;Simplification</option>
+            <option value="">&#160;&#160;&#160;Define term</option>
+            <option value="">&#160;&#160;&#160;Emphasize a Point</option>
+            <option value="">&#160;&#160;&#160;Sensitivity Consideration</option>
+            <option value="" disabled>Copy Editing</option>
+            <option value="">&#160;&#160;&#160;Style-Guide Edits</option>
+            <option value="">&#160;&#160;&#160;Tonal Edits</option>
+            <option value="">&#160;&#160;&#160;Syntax Correction</option>
+            <option value="" disabled>Elaboration</option>
+            <option value="">&#160;&#160;&#160;Background</option>
+            <option value="">&#160;&#160;&#160;Analysis</option>
+            <option value="" disabled>Fact Addition</option>
+            <option value="">&#160;&#160;&#160;Event Addition</option>
+            <option value="">&#160;&#160;&#160;Quote Addition</option>
+            <option value="">&#160;&#160;&#160;Document Addition</option>
             <option value="" disabled>Verification</option>
             <option value="">&#160;&#160;&#160;Correction</option>
             <option value="">&#160;&#160;&#160;Additional Sourcing</option>
